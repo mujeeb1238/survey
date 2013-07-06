@@ -12,6 +12,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/*
+ * this is a file developed by lala singh
+ * */
+
 public class CHOOSE_MULTIPLE extends JPanel {
 
 	JLabel questionThreeLable;
