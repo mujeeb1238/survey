@@ -24,7 +24,7 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 	JCheckBox button1;
 	JCheckBox button2;
 	JCheckBox button3;
-	JCheckBox button4;
+	JCheckBox JCheckbutton433;
 	JTextArea casteOtherText;
 	JCheckBox button5;
 
