@@ -1,5 +1,6 @@
 package com.survey.form;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener {
 
@@ -24,14 +26,14 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 	JCheckBox button1;
 	JCheckBox button2;
 	JCheckBox button3;
-	JCheckBox JCheckbutton433;
-	JTextArea casteOtherText;
+	JCheckBox button4;
+	JTextField casteOtherText;
 	JCheckBox button5;
 
 	Connection connection;
 	Statement statement;
 	ResultSet resultSet;
-	int q_seq;
+	int q_id;
 	String q_text,a_type,typedText,typedText1;
 
 	CHOOSE_SINGLE_OTHER() throws SQLException {
@@ -43,13 +45,13 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 			statement = connection.createStatement();
 
 			resultSet = statement
-					.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_SINGLE_OTHER' AND question_seq =5;");
+					.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_SINGLE_OTHER' AND question_id =5;");
 
-			q_seq = resultSet.getInt("question_seq");
+			q_id = resultSet.getInt("question_id");
 			q_text = resultSet.getString("question_text");
 			a_type=resultSet.getString("answer_type");
 
-			questionFiveLable = new JLabel(q_seq + " " + q_text);
+			questionFiveLable = new JLabel(q_id + " " + q_text);
 			questionFiveLable.setBounds(100, 50, 500, 20);
 			this.add(questionFiveLable);
 
@@ -69,6 +71,31 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 					String str = resultSet.getString("choice_text");
 					button1 = new JCheckBox(str);
 					button1.setBounds(140, 80, 50, 20);
+					button1.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
 					bg.add(button1);
 					this.add(button1);
 					button1.addActionListener(this);
@@ -91,6 +118,31 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 					button2.setBounds(210, 80, 70, 20);
 					bg.add(button2);
 					this.add(button2);
+					button2.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
 					button2.addActionListener(this);
 					button2.addActionListener(new ActionListener() {
 
@@ -111,6 +163,31 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 					button3.setBounds(140, 110, 70, 20);
 					bg.add(button3);
 					this.add(button3);
+					button3.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
 					button3.addActionListener(this);
 					button3.addActionListener(new ActionListener() {
 
@@ -128,9 +205,34 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 				} else if (b == 4) {
 					String str = resultSet.getString("choice_text");
 					button4 = new JCheckBox(str);
-					button4.setBounds(210, 110, 70, 20);
+					button4.setBounds(210, 110, 80, 20);
 					bg.add(button4);
 					this.add(button4);
+					button4.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
 					button4.addActionListener(this);
 					button4.addActionListener(new ActionListener() {
 
@@ -151,12 +253,37 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 					button5.setBounds(80, 140, 70, 20);
 					bg.add(button5);
 					this.add(button5);
+					button5.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
 					button5.addActionListener(this);
 				}
 			}
 
-			casteOtherText = new JTextArea();
-			casteOtherText.setBounds(280, 110, 70, 20);
+			casteOtherText = new JTextField(15);
+			casteOtherText.setBounds(295, 110, 70, 20);
 			this.add(casteOtherText);
 			//casteOtherText.setEditable(false);
 			casteOtherText.addKeyListener(new KeyListener() {
@@ -170,7 +297,11 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 				public void keyReleased(KeyEvent e) {
 					// TODO Auto-generated method stub
 					typedText1=casteOtherText.getText();
-			
+					if(e.getKeyCode() == KeyEvent.VK_ENTER){
+						if(Home.nextButton.isEnabled()){
+						Home.nextButton.doClick();
+						}
+					}
 					
 				}
 				
@@ -203,8 +334,9 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getActionCommand().equalsIgnoreCase("Other")) {
+		if (e.getActionCommand().equalsIgnoreCase("Others")) {
 			casteOtherText.setEditable(true);
+			casteOtherText.requestFocus();
 //			typedText1=casteOtherText.getText();
 		} else {
 			casteOtherText.setEditable(false);
@@ -214,5 +346,12 @@ public final class CHOOSE_SINGLE_OTHER extends JPanel implements ActionListener 
 		
 
 	}
+	
+	public void paint(Graphics g){
+		super.paint(g);
+		button1.requestFocus();
+		System.out.println("CHOOSE_SINGLE_OTHER");
+	}
 
 }
+

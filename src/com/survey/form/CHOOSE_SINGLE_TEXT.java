@@ -1,7 +1,6 @@
 package com.survey.form;
 
-import java.awt.Color;
-import java.awt.List;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -11,11 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -41,7 +36,7 @@ public class CHOOSE_SINGLE_TEXT  extends JPanel{
 	Connection connection;
 	Statement statement;
 	ResultSet resultSet;
-	int q_seq;
+	int q_id;
 	String q_text,a_type,typedText,typedText1;
 	
 	CHOOSE_SINGLE_TEXT(){
@@ -53,18 +48,18 @@ public class CHOOSE_SINGLE_TEXT  extends JPanel{
 		statement = connection.createStatement();
 
 		resultSet = statement
-				.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_SINGLE_TEXT' AND question_seq =6;");
+				.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_SINGLE_TEXT' AND question_id =6;");
 
 		
 		
 		resultSet = statement
-				.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_SINGLE_TEXT' AND question_seq =6;");
+				.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_SINGLE_TEXT' AND question_id =6;");
 
-		q_seq = resultSet.getInt("question_seq");
+		q_id = resultSet.getInt("question_id");
 		q_text = resultSet.getString("question_text");
 		a_type=resultSet.getString("answer_type");
 		
-		questionSixLable = new JLabel(q_seq + " " + q_text);
+		questionSixLable = new JLabel(q_id + " " + q_text);
 		questionSixLable.setBounds(100, 50, 500, 20);
 		this.add(questionSixLable);
 
@@ -88,6 +83,31 @@ public class CHOOSE_SINGLE_TEXT  extends JPanel{
 				button1 = new JRadioButton(str);
 				button1.setBounds(140, 80, 200, 20);
 				bg.add(button1);
+				button1.addKeyListener(new KeyListener() {
+					
+					@Override
+					public void keyTyped(KeyEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void keyReleased(KeyEvent e) {
+						// TODO Auto-generated method stub
+						if(e.getKeyCode() == KeyEvent.VK_ENTER){
+							if(Home.nextButton.isEnabled()){
+							Home.nextButton.doClick();
+							}
+						}
+						
+					}
+					
+					@Override
+					public void keyPressed(KeyEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 				this.add(button1);
 		//		button1.addActionListener(this);
 				button1.addActionListener(new ActionListener() {
@@ -162,6 +182,31 @@ public class CHOOSE_SINGLE_TEXT  extends JPanel{
 				button4 = new JRadioButton(str);
 				button4.setBounds(140, 170, 200, 20);
 				bg.add(button4);
+				button4.addKeyListener(new KeyListener() {
+					
+					@Override
+					public void keyTyped(KeyEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void keyReleased(KeyEvent e) {
+						// TODO Auto-generated method stub
+						if(e.getKeyCode() == KeyEvent.VK_ENTER){
+							if(Home.nextButton.isEnabled()){
+							Home.nextButton.doClick();
+							}
+						}
+						
+					}
+					
+					@Override
+					public void keyPressed(KeyEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 				this.add(button4);
 			//	button4.addActionListener(this);
 				button4.addActionListener(new ActionListener() {
@@ -236,6 +281,11 @@ public class CHOOSE_SINGLE_TEXT  extends JPanel{
 		button3text.addKeyListener(l);
 		button4text.addKeyListener(l);
 		button5text.addKeyListener(l);
+		/*button1.addKeyListener(l);
+		button2.addKeyListener(l);
+		button3.addKeyListener(l);
+		button4.addKeyListener(l);
+		button5.addKeyListener(l);*/
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -260,29 +310,25 @@ public class CHOOSE_SINGLE_TEXT  extends JPanel{
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
 			
+			
+			
 			JTextField field = (JTextField)e.getSource();
 			typedText1 = field.getText();
-			/*if(field == button1text){
-				typedText1=button1text.getText();
+			field.requestFocus();
+		
+			if(e.getKeyCode() == KeyEvent.VK_ENTER){
+				if(Home.nextButton.isEnabled()){
+				Home.nextButton.doClick();
+				}
 			}
-			else if(field == button2text){
-				typedText1=button2text.getText();
-			}
-			else if(field == button3text){
-				typedText1=button3text.getText();
-			}
-			else if(field == button4text){
-				typedText1=button4text.getText();
-			}
-			else if(field == button5text){
-				typedText1=button5text.getText();
-			}
-			
-			System.out.println(typedText1);*/
 			
 		}
 	}
 	
+	public void paint(Graphics g){
+		super.paint(g);
+		button1.requestFocus();
+	}
 	
 	}
 

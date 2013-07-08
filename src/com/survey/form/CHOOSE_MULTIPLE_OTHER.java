@@ -1,4 +1,5 @@
 package com.survey.form;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -17,7 +18,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
+public class CHOOSE_MULTIPLE_OTHER extends JPanel{
 	
 	JLabel questionSevenLable;
 	JLabel answerSevenLable;
@@ -35,8 +36,8 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 	Connection connection;
 	Statement statement;
 	ResultSet resultSet;
-	int q_seq;
-	String q_text,a_type,typedText,typedText1;
+	int q_id;
+	String q_text,a_type,typedText1,typedText2,typedText3,typedText4,typedText5,typedText6,typedText7;
 
 
 	CHOOSE_MULTIPLE_OTHER() throws SQLException {
@@ -48,32 +49,28 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 			statement = connection.createStatement();
 
 			resultSet = statement
-					.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_MULTIPLE_OTHER' AND question_seq =7;");
+					.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_MULTIPLE_OTHER' AND question_id =7;");
 
 			
 			
 			resultSet = statement
-					.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_MULTIPLE_OTHER' AND question_seq =7;");
+					.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_MULTIPLE_OTHER' AND question_id =7;");
 
-			q_seq = resultSet.getInt("question_seq");
+			q_id = resultSet.getInt("question_id");
 			q_text = resultSet.getString("question_text");
 			a_type=resultSet.getString("answer_type");
 			
-			questionSevenLable = new JLabel(q_seq + " " + q_text);
+			questionSevenLable = new JLabel(q_id + " " + q_text);
 			questionSevenLable.setBounds(100, 50, 500, 20);
 			this.add(questionSevenLable);
 
 			answerSevenLable = new JLabel("ANS :");
 			answerSevenLable.setBounds(100, 80, 40, 20);
 			this.add(answerSevenLable);
-			
-			ButtonGroup bg = new ButtonGroup();
-			
+		
 			resultSet = statement
 					.executeQuery("SELECT * FROM answers WHERE question_id =7;");
 
-			
-			
 			
 			while (resultSet.next()) {
 			
@@ -82,9 +79,33 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 					String str = resultSet.getString("choice_text");
 					button1 = new JCheckBox(str);
 					button1.setBounds(140, 80, 200, 20);
-					bg.add(button1);
 					this.add(button1);
-					button1.addActionListener(this);
+					button1.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
+
 					button1.addActionListener(new ActionListener() {
 
 						@Override
@@ -92,7 +113,7 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 							// TODO Auto-generated method stub
 							if (AbstractButton.SELECTED_ICON_CHANGED_PROPERTY != null) {
 
-					//			button1text = button1.getActionCommand();
+								typedText1 = button1.getActionCommand();
 								
 							}
 
@@ -105,9 +126,33 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 					String str = resultSet.getString("choice_text");
 					button2 = new JCheckBox(str);
 					button2.setBounds(140, 110, 200, 20);
-					bg.add(button2);
 					this.add(button2);
-					button2.addActionListener(this);
+					button2.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
+
 					button2.addActionListener(new ActionListener() {
 
 						@Override
@@ -115,8 +160,7 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 							// TODO Auto-generated method stub
 							if (AbstractButton.SELECTED_ICON_CHANGED_PROPERTY != null) {
 
-						//		button2text = button2.getActionCommand();
-							
+								typedText2 = button2.getActionCommand();
 							}
 
 						}
@@ -125,40 +169,80 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 					String str = resultSet.getString("choice_text");
 					button3 = new JCheckBox(str);
 					button3.setBounds(140, 140, 200, 20);
-					bg.add(button3);
 					this.add(button3);
-					button3.addActionListener(this);
+					button3.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
+
 					button3.addActionListener(new ActionListener() {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							if (AbstractButton.SELECTED_ICON_CHANGED_PROPERTY != null) {
-
-						//		button3text = button3.getActionCommand();
-							
+								typedText3 = button3.getActionCommand();
 							}
-
-						}
 					});
 				} else if (b == 4) {
 					String str = resultSet.getString("choice_text");
 					button4 = new JCheckBox(str);
 					button4.setBounds(140, 170, 200, 20);
-					bg.add(button4);
 					this.add(button4);
-					button4.addActionListener(this);
+					button4.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
+
 					button4.addActionListener(new ActionListener() {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							if (AbstractButton.SELECTED_ICON_CHANGED_PROPERTY != null) {
-
-						//		button4text = button4.getActionCommand();
-								
-							}
-
+						
+							typedText4 = button4.getActionCommand();
+					
 						}
 					});
 				} 
@@ -166,18 +250,46 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 					String str = resultSet.getString("choice_text");
 					button5 = new JCheckBox(str);
 					button5.setBounds(140, 200, 200, 20);
-					bg.add(button5);
 					this.add(button5);
-					button5.addActionListener(this);
+					button5.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
+
 					button5.addActionListener(new ActionListener() {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							if (AbstractButton.SELECTED_ICON_CHANGED_PROPERTY != null) {
-
-						//		button5text = button5.getActionCommand();
-								
+							typedText5 = button5.getActionCommand();
+							if(button5.isSelected()){
+								button1text.setEditable(true);
+								button1text.requestFocus();
+							//	typedText5=button1text.getText();
+							}else{
+								button1text.setEditable(false);
+								button1text.setText("");
 							}
 
 						}
@@ -188,9 +300,35 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 			}
 			
 			button1text=new JTextField();
-			button1text.setBounds(350, 80, 150, 20);
+			button1text.setBounds(350, 200, 150, 20);
 			this.add(button1text);
-			
+			button1text.setEditable(false);
+			button1text.addKeyListener(new KeyListener() {
+				
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void keyReleased(KeyEvent e) {
+					// TODO Auto-generated method stub
+					typedText6=button1text.getText();
+
+					if(e.getKeyCode() == KeyEvent.VK_ENTER){
+						if(Home.nextButton.isEnabled()){
+						Home.nextButton.doClick();
+						}
+					}
+				}
+				
+				@Override
+				public void keyPressed(KeyEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -207,16 +345,10 @@ public class CHOOSE_MULTIPLE_OTHER extends JPanel implements ActionListener {
 
 			}
 		}
-		
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-	
-		
-		
-		
-
+	public void paint(Graphics g){
+		super.paint(g);
+		button1.requestFocus();System.out.println("hello wordl");
 	}
-
+		
 		}

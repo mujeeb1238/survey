@@ -1,8 +1,7 @@
 package com.survey.form;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.KeyAdapter;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.Connection;
@@ -14,32 +13,29 @@ import java.util.regex.Pattern;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-import com.survey.form.NUMERIC.KL;
-
-public class TEXT extends JPanel {
-	
-	JLabel questionOneLable;
-	JLabel answerOneLable;
-	JTextField questionOneText;
+public class LONG_TEXT extends JPanel{
+	JLabel questionNineLable;
+	JLabel answerNineLable;
+	JTextArea questionNineText;
 	
 	Connection connection;
 	Statement statement;
 	ResultSet resultSet;
-	int a_id,q_id;
+	int q_id,a_id;
 	String q_text;
 	String typedText,a_type;
 
-	TEXT() throws Exception {
+	LONG_TEXT() throws Exception {
 		
 		try {
 			this.setLayout(null);
 			connection=new DriverCTion().getconnections();
 			statement=connection.createStatement();
 			resultSet = statement
-					.executeQuery("SELECT * FROM questions WHERE answer_type ='TEXT' AND question_id =1;");
+					.executeQuery("SELECT * FROM questions WHERE answer_type ='LONG_TEXT' AND question_id =9;");
 
 				q_id=resultSet.getInt("question_id");
 				q_text = resultSet.getString("question_text");
@@ -49,50 +45,51 @@ public class TEXT extends JPanel {
 						.executeQuery("SELECT * FROM answers;");
 
 
-			questionOneLable = new JLabel(q_id+" "+q_text);
-			questionOneLable.setBounds(100, 50, 500, 20);
+				questionNineLable = new JLabel(q_id+" "+q_text);
+				questionNineLable.setBounds(100, 50, 500, 20);
 		//	questionOneLable.setFont(new Font("Vijaya", Font.HANGING_BASELINE, 16));
-			this.add(questionOneLable);
+			this.add(questionNineLable);
 
-			answerOneLable = new JLabel("ANS :");
-			answerOneLable.setBounds(100, 80, 40, 20);
-			this.add(answerOneLable);
+			answerNineLable = new JLabel("ANS :");
+			answerNineLable.setBounds(100, 80, 40, 20);
+			this.add(answerNineLable);
 
-			questionOneText = new JTextField(){
-			public void addNotify() {
-		        super.addNotify();
-		        requestFocus();
-		    }
-		};
-			questionOneText.setBounds(150, 80, 100, 20);
-			this.add(questionOneText);
-			questionOneText.addKeyListener(new KeyListener() {
+			questionNineText = new JTextArea(5,6);
+		//	questionNineText.setBounds(150, 80, 200, 80);
+			JScrollPane spane = new JScrollPane(questionNineText);
+			spane.setBounds(150, 80, 200, 80);
+			this.add(spane);
+			questionNineText.addKeyListener(new KeyListener() {
 				
 				@Override
 				public void keyTyped(KeyEvent e) {
 					// TODO Auto-generated method stub
 					
-					String input = questionOneText.getText();
+					String input = questionNineText.getText();
 					Pattern p = Pattern.compile("[^0-9]");
 					Matcher m = p.matcher(input);
 					if (m.find()) {
-						answerOneLable.setVisible(true);
-						answerOneLable.setForeground(Color.red);
+						answerNineLable.setVisible(true);
+						answerNineLable.setForeground(Color.red);
 
 					} else {
-						answerOneLable.setVisible(true);
-						answerOneLable.setForeground(Color.black);
+						answerNineLable.setVisible(true);
+						answerNineLable.setForeground(Color.black);
 					}
 				}
 				
 				@Override
 				public void keyReleased(KeyEvent e) {
 					// TODO Auto-generated method stub
-					if(e.getKeyCode() == KeyEvent.VK_ENTER){
-						if(Home.nextButton.isEnabled()){
-							Home.nextButton.doClick();
-						}
+
+					if(e.getKeyCode() == KeyEvent.VK_TAB){
+					Home.nextButton.requestFocus();
 					}
+					/*if(e.getKeyCode() == KeyEvent.VK_ENTER){
+						if(Home.nextButton.isEnabled()){
+						Home.nextButton.doClick();
+						}
+					}*/
 				}
 				
 				@Override
@@ -119,5 +116,9 @@ public class TEXT extends JPanel {
 
 	}
 	
+	public void paint(Graphics g){
+		super.paint(g);
+		questionNineText.requestFocus();
+	}
 	
 }

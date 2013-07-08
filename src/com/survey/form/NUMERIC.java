@@ -1,6 +1,7 @@
 package com.survey.form;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -25,7 +26,7 @@ public class NUMERIC extends JPanel {
 	Statement statement;
 	ResultSet resultSet;
 	String q_text,a_type;
-	int q_seq,q_id;
+	int q_id;
 
 	NUMERIC() throws Exception {
 
@@ -36,14 +37,14 @@ public class NUMERIC extends JPanel {
 			statement = connection.createStatement();
 
 			resultSet = statement
-					.executeQuery("SELECT * FROM questions WHERE answer_type ='NUMERIC' AND question_seq =2;");
+					.executeQuery("SELECT * FROM questions WHERE answer_type ='NUMERIC' AND question_id =2;");
 
 			q_id=resultSet.getInt("question_id");
-			q_seq = resultSet.getInt("question_seq");
+			
 			q_text = resultSet.getString("question_text");
 			a_type=resultSet.getString("answer_type");
 
-			questionTwoLable = new JLabel(q_seq + " " + q_text);
+			questionTwoLable = new JLabel(q_id + " " + q_text);
 			questionTwoLable.setBounds(100, 50, 500, 20);
 			this.add(questionTwoLable);
 
@@ -77,18 +78,36 @@ public class NUMERIC extends JPanel {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
+			
 
+			if(e.getKeyCode()==KeyEvent.VK_ENTER){//KeyEvent.VK_ENTER
+				System.out.println(e.getKeyCode());
+				if(Home.nextButton.isEnabled()){
+					Home.nextButton.doClick();
+				
+				}
+			}
+			
 			String input = questionTwoText.getText();
 			Pattern p = Pattern.compile("[^0-9]");
 			Matcher m = p.matcher(input);
 			if (m.find()) {
 				answerTwoLable.setVisible(true);
 				answerTwoLable.setForeground(Color.red);
-
+				questionTwoText.setText("");
+				
 			} else {
 				answerTwoLable.setVisible(true);
 				answerTwoLable.setForeground(Color.black);
 			}
 		}
+	}
+	
+	public void paint(Graphics g){
+		super.paint(g);
+		this.questionTwoText.requestFocusInWindow();
+		//this.questionTwoText.requestFocus();
+		//this.questionTwoText.requestDefaultFocus();
+		//this.questionTwoText.requestFocus(true);
 	}
 }

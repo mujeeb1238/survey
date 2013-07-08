@@ -1,7 +1,10 @@
 package com.survey.form;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +28,7 @@ public class CHOOSE_SINGLE extends JPanel {
 	Connection connection;
 	Statement statement;
 	ResultSet resultSet;
-	int q_seq;
+	int q_id;
 	String q_text, typedText,a_type;
 
 	CHOOSE_SINGLE() {
@@ -36,13 +39,13 @@ public class CHOOSE_SINGLE extends JPanel {
 			statement = connection.createStatement();
 
 			resultSet = statement
-					.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_SINGLE' AND question_seq =4;");
+					.executeQuery("SELECT * FROM questions WHERE answer_type ='CHOOSE_SINGLE' AND question_id =4;");
 
-			q_seq = resultSet.getInt("question_seq");
+			q_id = resultSet.getInt("question_id");
 			q_text = resultSet.getString("question_text");
 			a_type=resultSet.getString("answer_type");
 
-			questionFourLable = new JLabel(q_seq + " " + q_text);
+			questionFourLable = new JLabel(q_id + " " + q_text);
 			questionFourLable.setBounds(100, 50, 500, 20);
 			this.add(questionFourLable);
 
@@ -63,6 +66,31 @@ public class CHOOSE_SINGLE extends JPanel {
 					button1.setBounds(140, 80, 200, 20);
 					button.add(button1);
 					this.add(button1);
+					button1.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
 					button1.addActionListener(new ActionListener() {
 
 						@Override
@@ -83,6 +111,32 @@ public class CHOOSE_SINGLE extends JPanel {
 					button2.setBounds(140, 110, 80, 20);
 					button.add(button2);
 					this.add(button2);
+					button2.addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							if(e.getKeyCode() == KeyEvent.VK_ENTER){
+									if(Home.nextButton.isEnabled()){
+									Home.nextButton.doClick();
+									}
+								}
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+					});
+
 					button2.addActionListener(new ActionListener() {
 
 						@Override
@@ -135,6 +189,11 @@ public class CHOOSE_SINGLE extends JPanel {
 			}
 		}
 
+	}
+	public void paint(Graphics g){
+		super.paint(g);
+		button1.requestFocus();
+		
 	}
 
 }
